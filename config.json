@@ -1,0 +1,39 @@
+{
+    "Script": {
+        "_Timeout": "Timeout for script to wait before calling the PMS process in seconds",
+        "Timeout": "60",
+        "_UseCachet": "Set to true to use Cachet for status updates. https://github.com/CachetHQ/Cachet",
+        "UseCachet": true,
+        "_UseDiscord": "Set to true to use Discord webhook logging",
+        "UseDiscord": true
+    },
+    "Discord": {
+        "DiscordWebhookURL": "",
+        "DiscordEmbedURL": "",
+        "DiscordEmbedTitleOK": "[Server Status - ONLINE]",
+        "DiscordEmbedOkColor": "4289797",
+        "DiscordEmbedThumbnailOkURL": "",
+        "DiscordEmbedTitleFail": "[Server Status - OFFLINE]",
+        "DiscordEmbedFailColor": "15158332",
+        "DiscordEmbedThumbnailFailURL": "",
+        "DiscordEmbedTitleUpdate": "[Server Status - MAINTENANCE]",
+        "DiscordEmbedUpdateColor": "4289797",
+        "DiscordEmbedThumbnailUpdateURL": ""
+    },
+    "Plex": {
+        "PlexLocalURL": "http://127.0.0.1:32400/web/index.html",
+        "PlexRemoteURL": ""
+    },
+    "Cachet": {
+        "CachetToken": "",
+        "CachetPlexURL": "https://status.urdomain.net/api/v1/components/3",
+        "CachetPlexWDUrl": "https://status.urdomain.net/api/v1/components/6",
+        "PlexComponentID": 3,
+        "PlexWatchDogCompID": 6
+    },
+    "EventMessages": {
+        "StatusOkayFile": "Okay.txt",
+        "StatusFailFile": "Failed.txt",
+        "StatusUpdateFile": "Update.txt"
+    }
+}

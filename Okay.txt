@@ -1,0 +1,4 @@
+The server is currently online! [Ok]
+
+This is an example message via the PlexWatchDog script.
+https://github.com/alexandzors/PlexWatchDog
