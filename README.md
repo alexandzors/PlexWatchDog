@@ -15,7 +15,7 @@ This script is still a W.I.P. Use at your own risk!
 # Pre-Notes
 This script was built in a PowerShell 7.0.3 environment. So it is recommended to upgrade to PS 7.0.3.
 
-![](img\readme-psversion.jpg)
+![PowerShell Version](img\readme-psversion.jpg)
 
 This repo also contains the requires function files found in `/Utils` so no third party functions are required to be installed.
 
@@ -57,17 +57,17 @@ This repo also contains the requires function files found in `/Utils` so no thir
 6. Profit.
 
 # Discord Status Messages
-![](\img\readme-discordmsgs.jpg)
+![Discord Messages](\img\readme-discordmsgs.jpg)
 
 Discord status messages are sent to a specified channel via a webhook. You can create this webhook in your channel settings. Messages are editable except for the timestamp. Message types are defined in the `config.json` in the `"Discord"` section. Message descriptions are inside the 3 text files in the root directory.
 - `Okay.txt`
 - `Fail.txt`
 - `Update.txt`
 
-![](\img\readme-dismsgbreakdown.jpg)
+![Message Breakdown for Discord Messages](\img\readme-dismsgbreakdown.jpg)
 With Thumbnail:
 
-![](\img\readme-discordmsgwithicon.jpg)
+![Discord Message with Thumbnail](\img\readme-discordmsgwithicon.jpg)
 
 # Dev Env
 - Install / Upgrade to PS 7.0.3+
