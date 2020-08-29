@@ -17,7 +17,7 @@ This script was built in a PowerShell 7.0.3 environment. So it is recommended to
 
 ![PowerShell Version](/img/readme-psversion.jpg)
 
-This repo also contains the requires function files found in `/Utils` so no third party functions are required to be installed.
+This repo also contains the required function files found in `/Utils` so no third party functions are required to be installed.
 
 # How to Use
 1. Download the Repo as a ZIP
