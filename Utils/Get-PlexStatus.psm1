@@ -1,6 +1,6 @@
 # Created by github.com/alexandzors
 # Created: 2020/08/15 03:19:15
-# Last modified: 2020/08/27 01:34:41
+# Last modified: 2020/09/15 01:32:40
 Import-Module ".\Utils\Write-Log.psm1"
 <#
 .SYNOPSIS
@@ -49,7 +49,21 @@ function Get-PlexStatus {
                 Return 0
             }
         }
-        else {
+        elseif ($localurl -eq "" -and -not $remoteurl -eq "") {
+            try {
+                Write-Verbose "Get-PlexStatus: Checking Plex Remote URL Status: $remoteurl"
+                $HTTP_REMOTE_Request = [System.Net.WebRequest]::Create($remoteurl)
+                $HTTP_REMOTE_Request.Timeout = 15000
+                $HTTP_REMOTE_Response = $HTTP_LOCAL_Request.GetResponse()
+                $statuscode = [int]$HTTP_REMOTE_Response.StatusCode
+                Write-Verbose "Get-PlexStatus: Returning status code: $statuscode"
+                Return $statuscode             
+            } catch {
+                Write-Verbose $_.Exception.Message
+                Return 0
+            }            
+        }
+        elseif (-not $remoteurl -eq "" -and $localurl -eq "") {
             try {
                 Write-Verbose "Get-PlexStatus: Checking Plex Local URL Status: $localurl"
                 $HTTP_LOCAL_Request = [System.Net.WebRequest]::Create($localurl)
