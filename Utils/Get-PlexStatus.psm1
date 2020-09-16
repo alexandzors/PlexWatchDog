@@ -1,12 +1,12 @@
 # Created by github.com/alexandzors
 # Created: 2020/08/15 03:19:15
-# Last modified: 2020/09/15 01:32:40
+# Last modified: 2020/09/16 13:46:35
 Import-Module ".\Utils\Write-Log.psm1"
 <#
 .SYNOPSIS
     Get the status of Plex Media Server.
 .DESCRIPTION
-    This function checks the status code of the Plex Media Server via the web interface.
+    This function checks the status code of the Plex Media Server via the local web interface.
 .EXAMPLE
     PS C:\> $code = Get-PlexStatus -localurl "https://127.0.0.1:32400/web/index.html"
 .EXAMPLE
@@ -14,7 +14,6 @@ Import-Module ".\Utils\Write-Log.psm1"
     200
 .INPUTS
     -localurl = Local url used to access the Plex interface.
-    -remoteurl = Remote url used to access the plex interface.
 .OUTPUTS
     Script returns a status code. $statuscode.
 .NOTES
@@ -26,16 +25,12 @@ function Get-PlexStatus {
     param (
         [Parameter()]
         [string]
-        $localurl,
-        [Parameter()]
-        [string]
-        $remoteurl
+        $localurl
     )
-    $statuscode = [int]
+    $statuscode =
     Write-Verbose "Get-PlexStatus: Local URL $localurl"
-    Write-Verbose "Get-PlexStatus: Remote URL $remoteurl"
     try {
-        if ($remoteurl -eq "") {
+        if (-not $localurl -eq "") {
             try {
                 Write-Verbose "Get-PlexStatus: Checking Plex Local URL Status: $localurl"
                 $HTTP_LOCAL_Request = [System.Net.WebRequest]::Create($localurl)
@@ -49,41 +44,9 @@ function Get-PlexStatus {
                 Return 0
             }
         }
-        elseif ($localurl -eq "" -and -not $remoteurl -eq "") {
-            try {
-                Write-Verbose "Get-PlexStatus: Checking Plex Remote URL Status: $remoteurl"
-                $HTTP_REMOTE_Request = [System.Net.WebRequest]::Create($remoteurl)
-                $HTTP_REMOTE_Request.Timeout = 15000
-                $HTTP_REMOTE_Response = $HTTP_LOCAL_Request.GetResponse()
-                $statuscode = [int]$HTTP_REMOTE_Response.StatusCode
-                Write-Verbose "Get-PlexStatus: Returning status code: $statuscode"
-                Return $statuscode             
-            } catch {
-                Write-Verbose $_.Exception.Message
-                Return 0
-            }            
-        }
-        elseif (-not $remoteurl -eq "" -and $localurl -eq "") {
-            try {
-                Write-Verbose "Get-PlexStatus: Checking Plex Local URL Status: $localurl"
-                $HTTP_LOCAL_Request = [System.Net.WebRequest]::Create($localurl)
-                $HTTP_LOCAL_Request.Timeout = 15000
-                $HTTP_LOCAL_Response = $HTTP_LOCAL_Request.GetResponse()
-                $HTTP_LOCAL_Status = [int]$HTTP_LOCAL_Response.StatusCode
-                if ($HTTP_LOCAL_Status -eq 200) {
-                    Write-Verbose "Get-PlexStatus: Checking Plex Remote URL Status: $remoteurl"
-                    $HTTP_REMOTE_Request = [System.Net.WebRequest]::Create($remoteurl)
-                    $HTTP_REMOTE_Request.Timeout = 15000
-                    $HTTP_REMOTE_Response = $HTTP_REMOTE_Request.GetResponse()
-                    $statuscode = [int]$HTTP_REMOTE_Response.StatusCode
-                    Write-Verbose "Get-PlexStatus: Returning status code: $statuscode"
-                    Return $statuscode          
-                }    
-            } catch {
-                Write-Verbose $_.Exception.Message
-                Return 0
-            }
-     
+        else {
+            Write-Verbose "-localurl is not set! Please set a local url when calling Get-PlexStatus"
+            Write-Log -LogOutput ("-localurl is not set! Please set a local url when calling Get-PlexStatus")
         }
     }
     catch {

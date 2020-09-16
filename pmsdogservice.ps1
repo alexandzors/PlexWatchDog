@@ -1,6 +1,6 @@
 # Created by github.com/alexandzors
 # Created: 2020/08/14 02:09:26
-# Last modified: 2020/08/27 13:44:49
+# Last modified: 2020/09/16 13:55:12
 
 <# This script is designed to run on a Windows machine to monitor your Plex Media Server service using vanilla PowerShell.
 You do not need to install any modules to make this work. Everything is contained with in this file and supporting files.
@@ -64,31 +64,21 @@ if (($Config.Script.UseDiscord) -eq $true -or $false){
 Do {
     try {
         if ($SCachet -eq $true){Update-Cachet -ok -token ($Config.Cachet.CachetToken) -id ($Config.Cachet.PlexWatchDogCompID) -compURL ($Config.Cachet.CachetPlexWDUrl) -Verbose}
-        $status = Get-PlexStatus -localurl ($Config.Plex.PlexLocalURL) -remoteurl ($Config.Plex.PlexRemoteURL) -Verbose
+        [int]$status = Get-PlexStatus -localurl ($Config.Plex.PlexLocalURL) -Verbose
         Write-Host "PlexWatchDog: Returned Status from Get-PlexStatus: "$status
         if (-not $status -eq 200) {
-            $UPDATECHECK = Get-Service "Plex Update Service" -ErrorAction SilentlyContinue
-            if ($UPDATECHECK.Status -eq "Running") {
-                if ($SDiscord -eq $true) {
-                    Write-Host "PlexWatchDog: Sending Discord Update."
-                    $MSG = Get-Content ($Config.EventMessages.StatusUpdateFile) -Raw | Out-String
-                    Update-Discord -color ($Config.Discord.DiscordEmbedUpdateColor) -title ($Config.Discord.DiscordEmbedTitleUpdate) -url ($Config.Discord.DiscordEmbedURL) -webhookuri ($Config.Discord.DiscordWebhookURL) -thumbnail ($Config.Discord.DiscordEmbedThumbnailUpdateURL) -msg $MSG -Verbose
-                    Write-Host "PlexWatchDog: Finished Discord Update."
-                }     
-            } elseif ($UPDATECHECK.Status -eq "Stopped") {
-                if ($SCachet -eq $true) {
-                    Write-Host "PlexWatchDog: Sending Cachet Update."
-                    Update-Cachet -fail -token ($Config.Cachet.CachetToken) -id ($Config.Cachet.PlexComponentID) -compURL ($Config.Cachet.CachetPlexURL) -Verbose
-                    Write-Host "PlexWatchDog: Finished Cachet Update."
-                } 
-                if ($SDiscord -eq $true) {
-                    Write-Host "PlexWatchDog: Sending Discord Update."
-                    $MSG = Get-Content ($Config.EventMessages.StatusFailFile) -Raw | Out-String
-                    Update-Discord -color ($Config.Discord.DiscordEmbedFailColor) -title ($Config.Discord.DiscordEmbedTitleFail) -url ($Config.Discord.DiscordEmbedURL) -webhookuri ($Config.Discord.DiscordWebhookURL) -thumbnail ($Config.Discord.DiscordEmbedThumbnailFailURL) -msg $MSG -Verbose
-                    Write-Host "PlexWatchDog: Finished Discord Update."
-                }
-                Stop-Process -processname "Plex*"; Start-Process 'C:\Program Files (x86)\Plex\Plex Media Server\Plex Media Server.exe' -WorkingDirectory "C:\Program Files (x86)\Plex\Plex Media Server\"                      
+            if ($SCachet -eq $true) {
+                Write-Host "PlexWatchDog: Sending Cachet Update."
+                Update-Cachet -fail -token ($Config.Cachet.CachetToken) -id ($Config.Cachet.PlexComponentID) -compURL ($Config.Cachet.CachetPlexURL) -Verbose
+                Write-Host "PlexWatchDog: Finished Cachet Update."
+            } 
+            if ($SDiscord -eq $true) {
+                Write-Host "PlexWatchDog: Sending Discord Update."
+                $MSG = Get-Content ($Config.EventMessages.StatusFailFile) -Raw | Out-String
+                Update-Discord -color ($Config.Discord.DiscordEmbedFailColor) -title ($Config.Discord.DiscordEmbedTitleFail) -url ($Config.Discord.DiscordEmbedURL) -webhookuri ($Config.Discord.DiscordWebhookURL) -thumbnail ($Config.Discord.DiscordEmbedThumbnailFailURL) -msg $MSG -Verbose
+                Write-Host "PlexWatchDog: Finished Discord Update."
             }
+            Stop-Process -processname "Plex*"; Start-Process 'C:\Program Files (x86)\Plex\Plex Media Server\Plex Media Server.exe' -WorkingDirectory "C:\Program Files (x86)\Plex\Plex Media Server\"                      
         }
         if ($status -eq 200) {
             if ($SCachet -eq $true) {
