@@ -7,7 +7,7 @@ This script is still a W.I.P. Use at your own risk!
 # What do I do?
 
 PlexWatchDog monitors your Plex Media Server via the local web interface. If the web client returns a code other than Status 200 (aka Okay!) the script will automatically:
-1. Send a notifcation to a configured endpoint (Discord, or Cachet currently)
+1. Send a notification to a configured endpoint (Discord, or Cachet currently)
 2. Automatically kill all Plex processes
 3. Restart the Plex Media Server.exe.
 
