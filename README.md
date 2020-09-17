@@ -4,6 +4,15 @@ A PowerShell script to monitor your Plex Media Server.
 # WARNING
 This script is still a W.I.P. Use at your own risk!
 
+# What do I do?
+
+PlexWatchDog monitors your Plex Media Server via the local web interface. If the web client returns a code other than Status 200 (aka Okay!) the script will automatically:
+1. Send a notifcation to a configured endpoint (Discord, or Cachet currently)
+2. Automatically kill all Plex processes
+3. Restart the Plex Media Server.exe.
+
+*This script assumes that Plex is installed into the default directory. If enough people see the need I could make the location configurable via the config.json*
+
 # To-Do
 - Create a xml for Task Scheduler for automatic script running on machine restarts.
 - Move check for update service functionality into Get-PlexStatus function. So that `pmsdogservice.ps1` is only reading the config file, sending notifications, and restarting processes/services.
@@ -18,6 +27,8 @@ This script was built in a PowerShell 7.0.3 environment. So it is recommended to
 ![PowerShell Version](/img/readme-psversion.jpg)
 
 This repo also contains the required function files found in `/Utils` so no third party functions are required to be installed.
+
+You will need to update your systems Execution Policies to run this script. Plenty of docs on how to do that.
 
 # How to Use
 1. Download the Repo as a ZIP

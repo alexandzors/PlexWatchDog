@@ -1,6 +1,6 @@
 # Created by github.com/alexandzors
 # Created: 2020/08/14 02:09:26
-# Last modified: 2020/08/27 01:33:06
+# Last modified: 2020/09/16 18:56:48
 Import-Module ".\Utils\Write-Log.psm1"
 <#
 .SYNOPSIS
@@ -41,12 +41,12 @@ function Update-Cachet {
         if ($ok) {
             Write-Verbose "Update-Cachet: Sending OK status to Cachet API for Component ID: $id"
             $bodyok = '{"status":"1","id":' + $id + '}'
-            Invoke-WebRequest -Method PUT -Headers @{'X-Cachet-Token' = $Token} -ContentType 'application/json' -Uri $compURL -Body $bodyok
+            Invoke-WebRequest -Method PUT -Headers @{'X-Cachet-Token' = $Token} -ContentType 'application/json' -Uri $compURL -Body $bodyok -UseBasicParsing
             Write-Verbose "Update-Cachet: Status sent successfully for Component ID: $id!"
         } elseif ($fail) {
             Write-Verbose "Update-Cachet: Sending FAIL status to Cachet API for Component ID: $id."
             $bodyfail = '{"status":"4","id":' + $id + '}'
-            Invoke-WebRequest -Method PUT -Headers @{'X-Cachet-Token' = $Token} -ContentType 'application/json' -Uri $compURL -Body $bodyfail
+            Invoke-WebRequest -Method PUT -Headers @{'X-Cachet-Token' = $Token} -ContentType 'application/json' -Uri $compURL -Body $bodyfail -UseBasicParsing
             Write-Verbose "Update-Cachet: Status sent successfully for Component ID: $id!"
         }
     } catch {
