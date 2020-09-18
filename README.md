@@ -36,32 +36,32 @@ You will need to update your systems Execution Policies to run this script. Plen
 3. Edit the `config.json` file to match your environment preferences
 
 
-|Config   |Value  |
-|---------|---------|
-|Script.Timeout     | Value in Seconds (default 60) |
-|Script.UseCachet   | Enable Cachet output. |
-|Script.UseDiscord  | Enable Discord output |
-|Discord.DiscordWebhookURL | Webhook URL for Discord logging |
-|Discord.DiscordEmbedURL   | URL for Embed Title |
-|Discord.DiscordEmbedTitleOK  | Title of OK status Message   |
-|Discord.DiscordEmbedOkColor  | Message highlight color      |
-|Discord.DiscordEmbedThumbnailOkURL   | Direct image URL for message thumbnail (png recommended) |
-|Discord.DiscordEmbedTitleFail   |  Title of FAIL status Message  |
-|Discord.DiscordEmbedFailColor   | Message highlight color   |
-|Discord.DiscordEmbedThumbnailFailURL  | Direct image URL for message thumbnail (png recommended)    |
-|Discord.DiscordEmbedTitleUpdate   |  Title of UPDATE status Message  |
-|Discord.DiscordEmbedUpdateColor   |  Message highlight color   |
-|Discord.DiscordEmbedThumbnailUpdateURL   |  Direct image URL for message thumbnail (png recommended)   |
-|Plex.PlexLocalURL    |   Local URL for Plex (MANDATORY)  |
-|Plex.PlexRemoteURL   | Remote URL for Plex (Optional) |
-|Cachet.CachetToken | Cachet API Token |
-|Cachet.CachetPlexURL | API URL for Plex Component |
-|Cachet.PlexWDUrl | API URL for PlexWatchDog Component (Optional) |
-|Cachet.PlexComponentID | API ID for Plex component |
-|Cachet.PlexWatchDogCompID | API ID for PlexWatchDog component. Only needed if using PlexWDUrl! |
-|EventMessages.StatusOkayFile | Specifies text file for Okay message status. (Discord Logging) |
-|EventMessages.StatusFailFile | Specifies text file for Fail message status. (Discord Logging) |
-|Event.Messages.StatusUpdateFile | Specifies text file for Update message status. (Discord Logging) |
+|Config   |Value  | Working? |
+|---------|---------|---------|
+|Script.Timeout     | Value in Seconds (default 60) | **Yes** |
+|Script.UseCachet   | Enable Cachet output. |  **Yes** |
+|Script.UseDiscord  | Enable Discord output |  **Yes** |
+|Discord.DiscordWebhookURL | Webhook URL for Discord logging |  **Yes** |
+|Discord.DiscordEmbedURL   | URL for Embed Title |  **Yes** |
+|Discord.DiscordEmbedTitleOK  | Title of OK status Message   |  **Yes** |
+|Discord.DiscordEmbedOkColor  | Message highlight color      |  **Yes** |
+|Discord.DiscordEmbedThumbnailOkURL   | Direct image URL for message thumbnail (png recommended) |  **Yes** |
+|Discord.DiscordEmbedTitleFail   |  Title of FAIL status Message  |  **Yes** |
+|Discord.DiscordEmbedFailColor   | Message highlight color   |  **Yes** |
+|Discord.DiscordEmbedThumbnailFailURL  | Direct image URL for message thumbnail (png recommended)    |  **Yes** |
+|Discord.DiscordEmbedTitleUpdate   |  Title of UPDATE status Message  | **No** |
+|Discord.DiscordEmbedUpdateColor   |  Message highlight color   | **No** |
+|Discord.DiscordEmbedThumbnailUpdateURL   |  Direct image URL for message thumbnail (png recommended)   | **No** |
+|Plex.PlexLocalURL    |   Local URL for Plex (MANDATORY)  | **Yes** |
+|Plex.PlexRemoteURL   | Remote URL for Plex (Optional) | **No** |
+|Cachet.CachetToken | Cachet API Token |  **Yes** |
+|Cachet.CachetPlexURL | API URL for Plex Component |  **Yes** |
+|Cachet.PlexWDUrl | API URL for PlexWatchDog Component (Optional) |  **Yes** |
+|Cachet.PlexComponentID | API ID for Plex component |  **Yes** |
+|Cachet.PlexWatchDogCompID | API ID for PlexWatchDog component. Only needed if using PlexWDUrl! |  **Yes** |
+|EventMessages.StatusOkayFile | Specifies text file for Okay message status. (Discord Logging) |  **Yes** |
+|EventMessages.StatusFailFile | Specifies text file for Fail message status. (Discord Logging) |  **Yes** |
+|Event.Messages.StatusUpdateFile | Specifies text file for Update message status. (Discord Logging) | **No** |
 
 4. Start the `pmsdogservice.ps1` script.
 5. ??
